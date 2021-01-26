@@ -35,6 +35,9 @@ services:
     container_name: node-exporter
     ports:
       - '9100:9100'
+    command:
+      - '--collector.systemd=/usr/local/bin/node_exporter' 
+      - '--collector.processes=/proc'
   cadvisor:
     image: google/cadvisor:latest
     container_name: cadvisor
