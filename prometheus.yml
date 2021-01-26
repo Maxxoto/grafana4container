@@ -1,5 +1,6 @@
 global:
   scrape_interval: 5s
+
   external_labels:
     monitor: 'system-monitor'
 scrape_configs:
@@ -8,9 +9,9 @@ scrape_configs:
       - targets: ['localhost:9090'] ## IP Address of the localhost
   - job_name: 'node'
     static_configs:
-      - targets: ['172.17.0.1:9100']
+      - targets: ['172.19.0.1:9100']
   - job_name: 'cAdvisor'
     static_configs:
-      - targets: ['172.17.0.1:8080']
+      - targets: ['cadvisor:8080']
     tls_config:
       insecure_skip_verify: true

@@ -32,13 +32,20 @@ services:
     ports:
       - '9090:9090'
   node-exporter:
-    image: prom/node-exporter
-    container_name: node-exporter
+    image: quay.io/prometheus/node-exporter:latest
+    container_name: node_exporter
     ports:
       - '9100:9100'
-    command:
-      - '--collector.systemd=/usr/local/bin/node_exporter' 
-      - '--collector.processes=/proc'
+    network_mode: host
+    pid: host
+    volumes:
+      - '/:/host:ro,rslave'
+      - '/var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket'
+    command:      
+      - '--path.rootfs=/host'      
+      - '--collector.systemd' 
+      - '--collector.processes'
+      - '--no-collector.diskstats'
     restart: unless-stopped
   cadvisor:
     image: google/cadvisor:latest
