@@ -12,6 +12,7 @@ services:
       - prometheus
     ports:
       - '3000:3000'
+    restart: unless-stopped
   prometheus:
     image: prom/prometheus:latest
     user: root
@@ -38,6 +39,7 @@ services:
     command:
       - '--collector.systemd=/usr/local/bin/node_exporter' 
       - '--collector.processes=/proc'
+    restart: unless-stopped
   cadvisor:
     image: google/cadvisor:latest
     container_name: cadvisor
@@ -56,6 +58,7 @@ services:
     privileged: true
     devices:
       - /dev/kmsg
+    restart: unless-stopped
     # environment:
     #   - METRICS_RESOLUTION=5s
 networks:
