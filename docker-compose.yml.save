@@ -40,18 +40,18 @@ services:
     container_name: cadvisor
     ports:
       - '8080:8080'
-    volumes:
-      - /:/rootfs:ro
-      - /var/run:/var/run:rw
-      - /sys:/sys:ro
-      - /var/lib/docker/:/var/lib/docker:ro
-      - /dev/disk/:/dev/disk:ro
-#      - /cgroup:/cgroup:rw
+#    volumes:
+#      - /:/rootfs:ro
+#      - /var/run:/var/run:ro
+#      - /sys:/sys:ro
+#      - /var/lib/docker/:/var/lib/docker:ro
+#      - /dev/disk/:/dev/disk:ro
+#      - /cgroup:/cgroup:ro
     command:
       - '--docker_only'
-#      - '--disable_metrics=disk,tcp,udp,percpu,sched,process'
-#      - '--housekeeping_interval=10s'
-#    privileged: true
+      # - '--disable_metrics=disk,tcp,udp,percpu,sched,process'
+      # - '--housekeeping_interval=10s'
+    privileged: true
     devices:
       - /dev/kmsg
     # environment:
